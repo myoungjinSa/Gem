@@ -6,6 +6,7 @@
 #include "UI/ImGUI/imgui_impl_opengl3.h"
 
 class GraphicsDevice;
+class Window;
 class System
 {
 public:
@@ -18,7 +19,7 @@ public:
 
 private:
 	GraphicsDevice* pDevice;
-	GLFWwindow* pMainWindow;
+	Window* pMainWindow;
 };
 
 

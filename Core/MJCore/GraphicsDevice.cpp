@@ -1,6 +1,12 @@
 #include <GLFW/glfw3.h>
+#include "Window.h"
 #include "GraphicsDevice.h"
 #include "String/String.h"
+#include <stdio.h>
+
+void ErrorCallback(int error, const char* description) {
+	fprintf(stderr, "Glfw Error %d: %s\n", error, description);
+}
 
 GraphicsDevice::GraphicsDevice() 
 	: shaderVersion(nullptr)
@@ -11,48 +17,77 @@ GraphicsDevice::~GraphicsDevice() {
 
 }
 
-OpenGL::OpenGL() 
+bool OpenGL::GLFWInitializer::Init() {
+	glfwSetErrorCallback(ErrorCallback);
+	if (!glfwInit())
+		return false;
+
+	return true;
+}
+
+void OpenGL::GLFWInitializer::SetShaderVersion() {
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+}
+
+OpenGL::OpenGL()
 	:GraphicsDevice()
+	, pGLFWInitializer(nullptr)
+	, bUseGLFW(false)
 {
 }
+
+OpenGL::OpenGL(bool _bUseGLFW) 
+	: GraphicsDevice()
+	, pGLFWInitializer(nullptr)
+{
+	bUseGLFW = _bUseGLFW;
+}
+
 OpenGL::~OpenGL() {
 
 }
 
 bool OpenGL::Initialize() {
-
 	shaderVersion = "#version 130";
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+	if (bUseGLFW) {
+		GLFWInitializer* pGLFWInitializer = new GLFWInitializer();
+		if (!pGLFWInitializer->Init())
+			return false;
+
+		pGLFWInitializer->SetShaderVersion();
+		delete pGLFWInitializer;
+		return true;
+	}
 
 	return false;
 }
 
-void OpenGL::Shutdown() {
-
+void OpenGL::Shutdown(Window& window) {
+	window.Close();
 }
 
-void OpenGL::Shutdown(GLFWwindow& window) {
-	glfwDestroyWindow(&window);
-	glfwTerminate();
-}
+Window* OpenGL::CreateWindow(int width, int height, std::string title) {
+	Window* pWindow = new OpenGLWindow;
+	if (!pWindow->Create(*pWindow, width, height, title))
+		return nullptr;
 
-GLFWwindow* OpenGL::CreateGLFWWindow(int width, int height, std::string title) {
-	GLFWwindow* pWindow = nullptr;
-
-	pWindow = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 	return pWindow;
 }
 
-void OpenGL::ClearWindow(GLFWwindow& window, float r, float g, float b, float a) {
+void OpenGL::SetCurrentContext(Window& window) {
+	window.SetCurrentContext();
+	window.EnableVSync(true);
+}
+void OpenGL::ClearWindow(Window& window, float r, float g, float b, float a) {
 	int width, height;
-	glfwGetFramebufferSize(&window, &width, &height);
+	window.Resize(width, height);
 	glViewport(0, 0, width, height);
 	glClearColor(r * a, g * a, b * a, a);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void OpenGL::SwapBuffers(GLFWwindow& window) {
-	glfwSwapBuffers(&window);
+void OpenGL::SwapBuffers(Window& window) {
+	window.SwapBuffers();
 }
 

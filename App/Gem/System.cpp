@@ -2,10 +2,7 @@
 #include <stdio.h>
 #include <GLFW/glfw3.h>
 #include "..\..\Core\MJCore\GraphicsDevice.h"
-
-void ErrorCallback(int error, const char* description) {
-	fprintf(stderr, "Glfw Error %d: %s\n", error, description);
-}
+#include "..\..\Core\MJCore\Window.h"
 
 System::System()
 	:pDevice(nullptr)
@@ -21,19 +18,17 @@ System::~System() {
 
 bool System::Initialize() {
 	//Create Window 
+	pDevice = new OpenGL(true);
+	assert(pDevice);
+	if (!pDevice->Initialize())
+		return false;
 
-	glfwSetErrorCallback(ErrorCallback);
-	if (!glfwInit())
-		return 1;
-
-	pDevice = new OpenGL;
-	pMainWindow = pDevice->CreateGLFWWindow(1280, 720, "Gem");
+	pMainWindow = pDevice->CreateWindow(1280, 720, "Gem");
 	if (!pMainWindow)
 		return false;
 
-	glfwMakeContextCurrent(pMainWindow);
-	glfwSwapInterval(1); // Enable Sync
-
+	pDevice->SetCurrentContext(*pMainWindow);
+	
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
@@ -45,9 +40,15 @@ bool System::Initialize() {
 	//Setup Dear ImGUI styl
 	ImGui::StyleColorsDark();
 
-	//Setup Platform/Renderer backends
-	if (!ImGui_ImplGlfw_InitForOpenGL(pMainWindow, true)) {
-		return false;
+	if (OpenGLWindow* pGLWindow = dynamic_cast<OpenGLWindow*>(pMainWindow)) {
+		//Setup Platform/Renderer backends
+		GLFWwindow* pGLFWWindow = pGLWindow->GetWindowHandle();
+		if (!pGLFWWindow)
+			return false;
+
+		if (!ImGui_ImplGlfw_InitForOpenGL(pGLFWWindow, true)) {
+			return false;
+		}
 	}
 
 	const char* shaderVersion = pDevice->GetShaderVersion();
@@ -78,13 +79,8 @@ void System::Run() {
 	bool show_another_window = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-	while (!glfwWindowShouldClose(pMainWindow)) {
-		// Poll and handle events (inputs, window resize, etc.)
-		// You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
-		// - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
-		// - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
-		// Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
-		glfwPollEvents();
+	while (!pMainWindow->ShouldClose()) {
+		pMainWindow->PollEvents();
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();

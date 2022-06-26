@@ -153,10 +153,12 @@
     <ClInclude Include="Libs\glfw\include\GLFW\glfw3.h" />
     <ClInclude Include="Libs\glfw\include\GLFW\glfw3native.h" />
     <ClInclude Include="String\String.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsDevice.cpp" />
     <ClCompile Include="String\String.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
