@@ -80,8 +80,6 @@ void System::Run() {
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 	while (!pMainWindow->ShouldClose()) {
-		pMainWindow->PollEvents();
-
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -125,6 +123,8 @@ void System::Run() {
 		pDevice->ClearWindow(*pMainWindow, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		pDevice->SwapBuffers(*pMainWindow);
+		
+		pMainWindow->PollEvents();
 	}
 }
 

@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="UI\ImGUI\imgui.cpp" />
     <ClCompile Include="UI\ImGUI\imgui_demo.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="UI\ImGUI\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="UI\ImGUI\imconfig.h" />
     <ClInclude Include="UI\ImGUI\imgui.h" />

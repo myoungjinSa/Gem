@@ -69,3 +69,4 @@ void OpenGLWindow::SwapBuffers() {
 
 	glfwSwapBuffers(pWindow);
 }
+

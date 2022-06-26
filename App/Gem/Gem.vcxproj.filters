@@ -45,6 +45,9 @@
     <ClCompile Include="UI\ImGUI\imgui_widgets.cpp">
       <Filter>소스 파일\ImGUI</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="System.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="UI\ImGUI\imstb_truetype.h">
       <Filter>소스 파일\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
