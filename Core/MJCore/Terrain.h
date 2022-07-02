@@ -46,6 +46,4 @@ private:
 
 	int gridX;
 	int gridZ;
-
-	
 };

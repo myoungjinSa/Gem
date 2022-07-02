@@ -1,8 +1,7 @@
 #ifndef _GRAPHICS_DEVICE_H
 #define _GRAPHICS_DEVICE_H
 #include <string>
-#include "glew.h"
-
+#include "../../Libs/glew/include/glew.h"
 
 class Window;
 class GraphicsDevice {

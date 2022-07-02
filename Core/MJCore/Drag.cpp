@@ -1,5 +1,5 @@
 #include "Drag.h"
-#include "System.h"
+//#include "System.h"
 
 Drag::Drag() 
 	: bTracking(false)
@@ -45,8 +45,8 @@ void DragContext::Init() {
 }
 
 void DragContext::Update() {
-	bShiftKeyDown = IsKeyDown(VK_SHIFT);
-	bControlKeyDown = IsKeyDown(VK_CONTROL);
-	bAltKeyDown = IsKeyDown(VK_MENU);
+	//bShiftKeyDown = IsKeyDown(VK_SHIFT);
+	//bControlKeyDown = IsKeyDown(VK_CONTROL);
+	//bAltKeyDown = IsKeyDown(VK_MENU);
 }
 

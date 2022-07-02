@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "Input.h"
+//#include "Input.h"
 #include "Logger.h"
 #include "Quaternion.h"
 
@@ -51,8 +51,8 @@ Camera::~Camera() {
 }
 
 bool Camera::Initialize(Renderer& renderer) {
-	MouseInput::Attach(this);
-	KeyboardInput::Attach(this);
+	//MouseInput::Attach(this);
+	//KeyboardInput::Attach(this);
 
 	return true;
 }
@@ -60,8 +60,8 @@ bool Camera::Initialize(Renderer& renderer) {
 
 
 void Camera::Shutdown(Renderer& renderer) {
-	MouseInput::Detach(this);
-	MouseInput::Detach(this);
+	//MouseInput::Detach(this);
+	//MouseInput::Detach(this);
 }
 
 void Camera::Update(float deltaTime) {
@@ -75,18 +75,18 @@ void Camera::Update(float deltaTime) {
 	BuildViewMatrix();
 	
 	float movingSpeed = transform.get()->GetMovingSpeed();
-	if (KeyboardInput::IsKeyDown(KEY_D)) {
-		Move(GetRight() * 1.0f, movingSpeed, deltaTime);
-	}
-	if (KeyboardInput::IsKeyDown(KEY_A)) {
-		Move(GetRight() * -1.0f, movingSpeed, deltaTime);
-	}
-	if (KeyboardInput::IsKeyDown(KEY_W)) {
-		Move(GetLook(), movingSpeed, deltaTime);
-	}
-	if (KeyboardInput::IsKeyDown(KEY_S)) {
-		Move(GetLook() * -1.0f, movingSpeed, deltaTime);
-	}
+	//if (KeyboardInput::IsKeyDown(KEY_D)) {
+	//	Move(GetRight() * 1.0f, movingSpeed, deltaTime);
+	//}
+	//if (KeyboardInput::IsKeyDown(KEY_A)) {
+	//	Move(GetRight() * -1.0f, movingSpeed, deltaTime);
+	//}
+	//if (KeyboardInput::IsKeyDown(KEY_W)) {
+	//	Move(GetLook(), movingSpeed, deltaTime);
+	//}
+	//if (KeyboardInput::IsKeyDown(KEY_S)) {
+	//	Move(GetLook() * -1.0f, movingSpeed, deltaTime);
+	//}
 }
 
 void Camera::SetViewport(const Rect2f& _viewport) {
@@ -182,18 +182,18 @@ void Camera::SetFrustum(float width, float height, float _near, float _far, floa
 }
 
 void Camera::ProcessEvent(Event& e) {
-	if (MouseInput::MouseEvent* pMouseEvent = dynamic_cast<MouseInput::MouseEvent*>(&e)) {
-		if (pMouseEvent->mouseState == MouseInput::MouseEvent::MOUSE_STATE::MOUSE_STATE_COUNT) {
-			return;
-		}
+	//if (MouseInput::MouseEvent* pMouseEvent = dynamic_cast<MouseInput::MouseEvent*>(&e)) {
+	//	if (pMouseEvent->mouseState == MouseInput::MouseEvent::MOUSE_STATE::MOUSE_STATE_COUNT) {
+	//		return;
+	//	}
 
-		Point2i newMousePoint = pMouseEvent->newMousePoint;
-		Point2i oldMousePoint = pMouseEvent->oldMousePoint;
-		if (pMouseEvent->mouseState == MouseInput::MouseEvent::MOUSE_STATE::MOUSE_MOVE) {
-			if (MouseInput::rightButtonDown) {
-				xAngle -= (newMousePoint.x - oldMousePoint.x) / 3.0f;
-				yAngle -= (newMousePoint.y - oldMousePoint.y) / 3.0f;
-			}
-		}
-	}
+	//	Point2i newMousePoint = pMouseEvent->newMousePoint;
+	//	Point2i oldMousePoint = pMouseEvent->oldMousePoint;
+	//	if (pMouseEvent->mouseState == MouseInput::MouseEvent::MOUSE_STATE::MOUSE_MOVE) {
+	//		if (MouseInput::rightButtonDown) {
+	//			xAngle -= (newMousePoint.x - oldMousePoint.x) / 3.0f;
+	//			yAngle -= (newMousePoint.y - oldMousePoint.y) / 3.0f;
+	//		}
+	//	}
+	//}
 }

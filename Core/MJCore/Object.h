@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <list>
 #include "Types.h"
 #include "Component.h"
 #include "Transform.h"

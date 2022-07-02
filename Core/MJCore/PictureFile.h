@@ -79,6 +79,7 @@ protected:
 	static FactoryPool factoryPool;
 };
 
+#ifdef _WIN64
 class GDIPictureFile : public PictureFile{
 public:
 	GDIPictureFile();
@@ -92,6 +93,7 @@ private:
 	static void UnloadGDIPlus();
 	static unsigned __int64 gdiplusToken;
 };
+#endif
 
 class VideoInfo {
 public:

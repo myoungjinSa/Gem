@@ -437,7 +437,7 @@ T Rect<T>::Area() const {
 	T width = GetWidth();
 	T height = GetHeight();
 	const T result = width * height;
-	assert(!std::numeric_limits<T>::is_integer || width == 0 || result / width == height);
+	//assert(!std::numeric_limits<T>::is_integer || width == 0 || result / width == height);
 	return result;
 }
 

@@ -135,7 +135,7 @@ bool Terrain::Initialize(Renderer& renderer) {
 	int xTileCount = gridX;
 	int zTileCount = gridZ;
 	meshBuilder.AddGrid(0, 0, xTileCount, zTileCount, Vec3f(-(xTileCount * scale.x) / 2.0f, -8.0f, -(zTileCount * scale.z) / 2.0f), scale, RGBA::FOREST_GREEN, *heightImage);
-	meshBuilder.CopyToMesh(renderer, *meshes.back(), &Vertex::BindVertexBuffer, &Vertex::Copy, sizeof(Vertex), Mesh::TriangleType::MeshType_Strip);
+	meshBuilder.CopyToMesh(renderer, *meshes.back(), &OpenGL::BindBuffer, &Vertex::Copy, sizeof(Vertex), Mesh::TriangleType::MeshType_Strip);
 	meshBuilder.End();
 
 	Vec3f diffuseColor(0.8f, 0.85f, 0.85f);

@@ -1,7 +1,7 @@
 #include "System.h"
 #include <stdio.h>
-#include <GLFW/glfw3.h>
 #include "..\..\Core\MJCore\GraphicsDevice.h"
+#include <GLFW/glfw3.h>
 #include "..\..\Core\MJCore\Window.h"
 
 System::System()

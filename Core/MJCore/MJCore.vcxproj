@@ -80,13 +80,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
-    <LibraryPath>D:\Gem\Libs\glew\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Gem\Libs\glew\lib;D:\Gem\Libs\PortAudio\libs;D:\Gem\Libs\FFMPEG\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
-    <LibraryPath>D:\Gem\Libs\glew\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Gem\Libs\glew\lib;D:\Gem\Libs\PortAudio\libs;D:\Gem\Libs\FFMPEG\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -122,7 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Gem\Libs\glew\include;D:\Gem\Libs\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Gem\Libs\glfw\include;D:\Gem\Libs\FFMPEG\include;D:\Gem\Libs\PortAudio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,7 +139,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Gem\Libs\glew\include;D:\Gem\Libs\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Gem\Libs\glfw\include;D:\Gem\Libs\FFMPEG\include;D:\Gem\Libs\PortAudio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,10 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AudioDevice.h" />
     <ClInclude Include="BoundingVolume.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Drag.h" />
+    <ClInclude Include="FFMPEGDecoder.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="GraphicsDevice.h" />
     <ClInclude Include="Libs\glfw\include\GLFW\glfw3.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="RayCast.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RGBA.h" />
+    <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="String\String.h" />
     <ClInclude Include="Terrain.h" />
@@ -184,10 +187,12 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioDevice.cpp" />
     <ClCompile Include="BoundingVolume.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Drag.cpp" />
+    <ClCompile Include="FFMPEGDecoder.cpp" />
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="GraphicsDevice.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -203,6 +208,7 @@
     <ClCompile Include="RayCast.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RGBA.cpp" />
+    <ClCompile Include="RingBuffer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="String\String.cpp" />
     <ClCompile Include="Terrain.cpp" />

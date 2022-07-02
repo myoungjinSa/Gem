@@ -4,7 +4,6 @@
 #include "GraphicsDevice.h"
 #include "Object.h"
 #include "Texture.h"
-#include "String/String.h"
 #include "Mesh.h"
 #include "Logger.h"
 #include <fstream>

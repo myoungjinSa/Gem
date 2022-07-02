@@ -1,11 +1,7 @@
 #include "PictureFile.h"
 #include "String/String.h"
-#include "System.h"
+//#include "System.h"
 #include "FFMPEGDecoder.h"
-
-#include <gdiplus.h>
-
-#pragma comment (lib,"Gdiplus.lib")
 
 WString imageList[]{
 	L".png",
@@ -243,6 +239,11 @@ bool PictureFile::IsImageFile(const WString& filename) {
 	}
 	return false;
 }
+#ifdef _WIN64
+#include <Windows.h>
+#include <gdiplus.h>
+
+#pragma comment (lib,"Gdiplus.lib")
 
 unsigned __int64 GDIPictureFile::gdiplusToken = 0;
 
@@ -302,7 +303,7 @@ bool GDIPictureFile::Save(Picture& picture, const WString& filename) {
 	
 	return true;
 } 
-
+#endif
 
 VideoInfo::VideoInfo()
 	: imageSize(0, 0)

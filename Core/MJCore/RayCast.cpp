@@ -42,7 +42,7 @@ Ray RayCast::Transform(const RigidTransform& transform, const Ray& ray) {
 
 void RayCast::Detransform(float scale, Ray& ray) {
 	ray.SetPosition(ray.GetPosition() * scale);
-	ray.SetDirection(ray.GetDirection() / (Max(scale, 0.1f)));
+	ray.SetDirection(ray.GetDirection() / (MAX(scale, 0.1f)));
 }
 
 Ray RayCast::Detransform(const RigidTransform& transform, const Ray& ray) {

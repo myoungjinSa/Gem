@@ -1,6 +1,7 @@
 #pragma once
 #include "GraphicsDevice.h"
 #include "Component.h"
+#include "MathUtils.h"
 
 class OpenGL;
 class Object;
